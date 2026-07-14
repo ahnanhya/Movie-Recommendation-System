@@ -7,9 +7,9 @@ public class Database {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/movie_recommendation",
+                    "jdbc:mysql://localhost:3306/movierecommendation",
                     "root",
-                    "YOUR_PASSWORD"
+                    "Psgr@123"
             );
             System.out.println("Database Connected!");
         }
