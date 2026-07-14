@@ -1,5 +1,5 @@
-drop database movierecommendation;
-CREATE DATABASE IF NOT EXISTS movierecommendation;
+
+CREATE DATABASE movierecommendation;
 USE movierecommendation;
 CREATE TABLE movies (
     movie_id INT AUTO_INCREMENT PRIMARY KEY,
