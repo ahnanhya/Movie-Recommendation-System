@@ -1,46 +1,30 @@
-import java.awt.Desktop;
-import java.io.File;
 import java.util.ArrayList;
+import frontend.Home;
 
 public class Main {
-    private static Database database;
-    private static ArrayList<Movie> movieList;
+    public static Database database;
+    public static ArrayList<Movie> movies;
     public static void main(String[] args) {
         // Connect to Database
         database = new Database();
         // Load Movies
-        movieList = database.getMovies();
+        movies = database.getMovies();
         // Sort Movies by Rating
-        if (!movieList.isEmpty()) {
-            DataStructures.mergeSort(movieList, 0, movieList.size() - 1);
+        if (movies.size() > 1) {
+            DataStructures.mergeSort(movies, 0, movies.size() - 1);
         }
         // Create Genre HashMap
-        DataStructures.createGenreMap(movieList);
+        DataStructures.createGenreMap(movies);
         System.out.println("Movie Recommendation System Started");
-        System.out.println("Movies Loaded : " + movieList.size());
-        // Open Frontend
-        openHomePage();
+        System.out.println("Movies Loaded : " + movies.size());
+        // Open Home Screen
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            new Home().setVisible(true);
+        });
     }
-    // Opens index.html
-    private static void openHomePage() {
-        try {
-            File file = new File("frontend/index.html");
-            if (file.exists()) {
-                Desktop.getDesktop().browse(file.toURI());
-            } else {
-                System.out.println("Cannot find frontend/index.html");
-                System.out.println(file.getAbsolutePath());
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static ArrayList<Movie> getMovies() {
+        return movies;
     }
-    // Returns all movies
-    public static ArrayList<Movie> getMovieList() {
-        return movieList;
-    }
-    // Returns database object
     public static Database getDatabase() {
         return database;
     }
