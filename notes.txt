@@ -1,0 +1,29 @@
+Movie-Recommendation-System/
+
+src/
+│
+├── Main.java                  // Starts backend/server
+├── Movie.java                 // Movie model
+├── Database.java              // MySQL operations
+├── RecommendationEngine.java  // Recommendation logic
+├── DataStructures.java        // All DSA implementations
+│
+frontend/
+│
+├── index.html
+├── movie.html
+├── wishlist.html
+├── watched.html
+│
+├── css/
+│   └── style.css
+│
+└── js/
+    ├── app.js
+    ├── search.js
+    ├── wishlist.js
+    └── darkmode.js
+│
+database/
+│
+└── movies.sql
