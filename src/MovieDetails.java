@@ -113,6 +113,17 @@ public class MovieDetails extends JFrame {
         mainPanel.add(buttonPanel);
 
         add(mainPanel);
+
+        // --- RESTORED BUTTON ACTION LISTENERS ---
+        addWishlist.addActionListener(e -> {
+            RecommendationEngine.addToWishlist(currentMovie);
+            JOptionPane.showMessageDialog(this, "Added to Wishlist!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        });
+
+        addWatched.addActionListener(e -> {
+            RecommendationEngine.addToWatched(currentMovie);
+            JOptionPane.showMessageDialog(this, "Marked as Watched!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        });
     }
 
     /**

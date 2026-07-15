@@ -1,29 +1,17 @@
-Movie-Recommendation-System/
-
-src/
+movie-recommendation-system/
 │
-├── Main.java                  // Starts backend/server
-├── Movie.java                 // Movie model
-├── Database.java              // MySQL operations
-├── RecommendationEngine.java  // Recommendation logic
-├── DataStructures.java        // All DSA implementations
+├── data/
+│   └── movies.sql                # SQL Script to initialize database and seed 80+ Tamil movies
 │
-frontend/
+├── src/
+│   ├── Main.java                 # Application entry point (Initializes UI and DB connection)
+│   ├── Movie.java                # Model class representing a Movie object
+│   ├── MovieDetails.java         # JFrame UI for displaying full movie details and the 5x2 matrix recommendations
+│   ├── Dashboard.java            # Main application dashboard (Filters, Search, Wishlist, Watched views)
+│   ├── DBConnection.java         # Singleton/Utility helper for handling MySQL JDBC connections
+│   └── RecommendationEngine.java  # Core logic handling Top Recommendations, Wishlist, and Watched lists
 │
-├── index.html
-├── movie.html
-├── wishlist.html
-├── watched.html
+├── lib/
+│   └── mysql-connector-j-x.x.x.jar # MySQL JDBC Driver library dependency
 │
-├── css/
-│   └── style.css
-│
-└── js/
-    ├── app.js
-    ├── search.js
-    ├── wishlist.js
-    └── darkmode.js
-│
-database/
-│
-└── movies.sql
+└── README.md                     # Project documentation and setup guide
