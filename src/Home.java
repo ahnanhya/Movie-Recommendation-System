@@ -1,6 +1,6 @@
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import javax.swing.*;
 
 public class Home extends JFrame {
     private JTextField searchField;
@@ -17,7 +17,6 @@ public class Home extends JFrame {
 
         // Create initial movie list
         displayedMovies = new ArrayList<>(Main.getMovies());
-
         // --- TOP NAVIGATION PANEL ---
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
         
@@ -52,9 +51,16 @@ public class Home extends JFrame {
         add(topPanel, BorderLayout.NORTH);
 
         // --- CENTER SCROLLABLE MOVIES PANEL ---
+        // 3 columns, auto-adjusting rows
         moviesPanel = new JPanel(new GridLayout(0, 3, 15, 15));
         moviesPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        JScrollPane scrollPane = new JScrollPane(moviesPanel);
+        
+        // FIX: Wrap the grid panel in a BorderLayout panel's NORTH region.
+        // This stops the grid from stretching vertically when there are few items.
+        JPanel scrollContentWrapper = new JPanel(new BorderLayout());
+        scrollContentWrapper.add(moviesPanel, BorderLayout.NORTH);
+
+        JScrollPane scrollPane = new JScrollPane(scrollContentWrapper);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -111,26 +117,35 @@ public class Home extends JFrame {
         card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
         card.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.GRAY, 1),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)
+                BorderFactory.createEmptyBorder(15, 15, 15, 15)
         ));
         card.setBackground(Color.WHITE);
+        card.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        // Give each card a fixed height so they look uniform
+        card.setPreferredSize(new Dimension(250, 150));
+        card.setMaximumSize(new Dimension(250, 150));
 
         JLabel titleLabel = new JLabel(movie.getTitle());
         titleLabel.setFont(new Font("Arial", Font.BOLD, 14));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel genreLabel = new JLabel("Genre: " + movie.getGenre());
+        genreLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+        genreLabel.setForeground(Color.DARK_GRAY);
         genreLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel ratingLabel = new JLabel("Rating: " + movie.getRating() + "/10");
         ratingLabel.setFont(new Font("Arial", Font.ITALIC, 12));
         ratingLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        card.add(Box.createVerticalGlue());
         card.add(titleLabel);
-        card.add(Box.createRigidArea(new Dimension(0, 5)));
+        card.add(Box.createRigidArea(new Dimension(0, 8)));
         card.add(genreLabel);
-        card.add(Box.createRigidArea(new Dimension(0, 5)));
+        card.add(Box.createRigidArea(new Dimension(0, 8)));
         card.add(ratingLabel);
+        card.add(Box.createVerticalGlue());
 
         // Click on Movie Card to open details
         card.addMouseListener(new java.awt.event.MouseAdapter() {
