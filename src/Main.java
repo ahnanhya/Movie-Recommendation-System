@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Main {
     public static Database database;
     public static ArrayList<Movie> movies;
-    public static void main(String[] args) {
+    public static void main(String[]  args) {
         // Connect to Database
         database = new Database();
         // Load Movies

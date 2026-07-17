@@ -1,17 +1,22 @@
 movie-recommendation-system/
 │
 ├── data/
-│   └── movies.sql                # SQL Script to initialize database and seed 80+ Tamil movies
+│   └── movies.sql                  # SQL Script to initialize database and seed 80+ Tamil movies
 │
 ├── src/
-│   ├── Main.java                 # Application entry point (Initializes UI and DB connection)
-│   ├── Movie.java                # Model class representing a Movie object
-│   ├── MovieDetails.java         # JFrame UI for displaying full movie details and the 5x2 matrix recommendations
-│   ├── Dashboard.java            # Main application dashboard (Filters, Search, Wishlist, Watched views)
-│   ├── DBConnection.java         # Singleton/Utility helper for handling MySQL JDBC connections
-│   └── RecommendationEngine.java  # Core logic handling Top Recommendations, Wishlist, and Watched lists
+│   ├── Main.java                   # Application entry point (Loads data cache and launches UI)
+│   ├── Movie.java                  # Model class representing individual movie attributes 
+│   ├── Database.java               # Manages MySQL JDBC connection & all CRUD queries
+│   ├── DataStructures.java         # Core DSA algorithms (Merge Sort, Binary Search, Stack, HashMap stacks) 
+│   ├── RecommendationEngine.java   # Business logic mapping content matching and processing queues 
+│   ├── Home.java                   # Primary application layout (Search, Filter grid, Navigation control)
+│   ├── MovieDetails.java           # Window for detailed logs and the horizontal recommendations grid  
+│   ├── AddMovie.java               # Form overlay capturing data for inserting new items  
+│   ├── DeleteMovie.java            # Interactive deletion list tied directly to structural cache sync
+│   ├── Wishlist.java               # Frame managing the local stack tracker for planned viewings
+│   └── Watched.java                # Frame displaying history via the recently watched stack
 │
 ├── lib/
-│   └── mysql-connector-j-x.x.x.jar # MySQL JDBC Driver library dependency
+│   └── mysql-connector-j-x.x.x.jar # MySQL JDBC Driver library dependency 
 │
-└── README.md                     # Project documentation and setup guide
+└── README.md                       # Project documentation and setup guide

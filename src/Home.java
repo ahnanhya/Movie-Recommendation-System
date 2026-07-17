@@ -50,7 +50,7 @@ public class Home extends JFrame {
                 genres.add(m.getGenre());
             }
         }
-        genreFilter = new JComboBox<>(genres.toArray(new String[0]));
+        genreFilter = new JComboBox<>(genres.toArray(new String[0] ));
         genreFilter.setBackground(INPUT_BG);
         genreFilter.setForeground(TEXT_WHITE);
         
