@@ -1,5 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 public class DeleteMovie extends JFrame {
     private JList<Movie> movieJList;
@@ -12,18 +13,62 @@ public class DeleteMovie extends JFrame {
         setSize(400, 450);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(home);
-        setLayout(new BorderLayout(10, 10));
+        
+        // --- COLOR PALETTE ---
+        Color wineRed = new Color(45, 6, 11);
+        Color textWhite = new Color(245, 245, 245);
+
+        // --- MAIN CONTAINER ---
+        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
+        mainPanel.setBackground(wineRed);
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
         listModel = new DefaultListModel<>();
         movieJList = new JList<>(listModel);
         
+        // Style list component with translucent black look
+        movieJList.setBackground(new Color(0, 0, 0, 130));
+        movieJList.setForeground(textWhite);
+        movieJList.setFont(new Font("Arial", Font.PLAIN, 14));
+        movieJList.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                label.setOpaque(isSelected);
+                label.setBackground(isSelected ? new Color(255, 255, 255, 40) : new Color(0, 0, 0, 0));
+                label.setForeground(Color.WHITE);
+                label.setBorder(BorderFactory.createEmptyBorder(8, 10, 8, 10));
+                return label;
+            }
+        });
+        
         refreshList();
 
-        add(new JScrollPane(movieJList), BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(movieJList);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setBorder(new LineBorder(new Color(255, 255, 255, 30)));
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
 
+        // --- BUTTON INTERFACE (Solid Black / White Text) ---
+        JPanel btnPanel = new JPanel(new FlowLayout());
+        btnPanel.setOpaque(false);
+        
         JButton deleteBtn = new JButton("Delete Selected Movie");
-        add(deleteBtn, BorderLayout.SOUTH);
+        deleteBtn.setBackground(Color.BLACK);
+        deleteBtn.setForeground(textWhite);
+        deleteBtn.setFocusPainted(false);
+        deleteBtn.setFont(new Font("Arial", Font.BOLD, 13));
+        deleteBtn.setBorder(BorderFactory.createCompoundBorder(
+            new LineBorder(new Color(60, 60, 60), 1),
+            BorderFactory.createEmptyBorder(8, 16, 8, 16)
+        ));
+        
+        btnPanel.add(deleteBtn);
+        mainPanel.add(btnPanel, BorderLayout.SOUTH);
+        add(mainPanel);
 
+        // --- CONTROLLER LOGIC ---
         deleteBtn.addActionListener(e -> {
             Movie selected = movieJList.getSelectedValue();
             if (selected != null) {
